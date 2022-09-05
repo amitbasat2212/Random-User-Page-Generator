@@ -9,10 +9,42 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const ModelSinglton = new Model();
-function test() {
+const RenderSinglton = new Render();
+function getFirendsOfUser() {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log(yield ModelSinglton.GettingFriendsOfUser());
+        const friends = yield ModelSinglton.GettingFriendsOfUser();
+        RenderSinglton.RenderFriendsUser(friends);
     });
 }
-test();
+function gettheMainUser() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const userMain = yield ModelSinglton.getMainUser();
+        RenderSinglton.RenderMainUser(userMain);
+    });
+}
+function getKyneaWestQuaote() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const qoute = yield ModelSinglton.getQuoteKanya();
+        RenderSinglton.RenderQoute(qoute);
+    });
+}
+function getPokimon() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const pockimon = yield ModelSinglton.GetPokemon();
+        RenderSinglton.Renderpokimon(pockimon);
+    });
+}
+function GetBaconText() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const text = yield ModelSinglton.getBaconText();
+        RenderSinglton.RenderBaconText(text);
+    });
+}
+$('#generete').on('click', () => {
+    gettheMainUser();
+    getKyneaWestQuaote();
+    getPokimon();
+    GetBaconText();
+    getFirendsOfUser();
+});
 //# sourceMappingURL=controller.js.map

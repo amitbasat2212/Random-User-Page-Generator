@@ -14,40 +14,95 @@ class Model {
             try {
                 const getFriends = yield $.get("https://randomuser.me/api/?results=6");
                 const UserFriends = [];
-                getFriends.results.forEach(element => {
+                getFriends.results.forEach((element) => {
                     UserFriends.push(new User(element.name.first, element.name.last));
                 });
                 console.log(getFriends);
                 return (UserFriends);
             }
             catch (err) {
-                console.log(err);
+                return { err: err };
             }
-            return [];
         });
     }
     getMainUser() {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = new User("", "", "", "");
+            const user = new User("", "", "", "", "");
             try {
                 const getFriends = yield $.get("https://randomuser.me/api/?results=1");
                 const user = getFriends.results[0];
-                const MainUser = new User(user.name.first, user.name.last, user.location.city, user.location.state);
+                const MainUser = new User(user.name.first, user.name.last, user.location.city, user.location.state, user.picture.medium);
                 return MainUser;
             }
             catch (err) {
-                console.log(err);
+                return { err: err };
             }
-            return user;
+        });
+    }
+    getQuoteKanya() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const quote = new Quote("");
+            try {
+                const getQuote = yield $.get("https://api.kanye.rest");
+                const quote = new Quote(getQuote.quote);
+                return quote;
+            }
+            catch (err) {
+                return { err: err };
+            }
+        });
+    }
+    GetPokemon() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const GetPokimon = yield $.get(`https://pokeapi.co/api/v2/ability/?limit=60&offset=${Math.random() * (30 - 10 + 1) + 10}}`);
+                console.log(GetPokimon);
+                const urlArray = JSON.stringify(GetPokimon.results[0].url).split("/");
+                const PetIndex = urlArray[urlArray.length - 2];
+                const pokemon = new Pokemon(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${PetIndex}.png`, GetPokimon.results[0].name);
+                return pokemon;
+            }
+            catch (err) {
+                return { err: err };
+            }
+        });
+    }
+    getBaconText() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const GetText = yield $.get("https://baconipsum.com/api/?type=meat-and-filler");
+                const TextLorem = new BaconText(GetText.join(" "));
+                return TextLorem;
+            }
+            catch (err) {
+                return { err: err };
+            }
         });
     }
 }
 class User {
-    constructor(FirstName, LastName, city = "", state = "") {
+    constructor(FirstName, LastName, city = "", state = "", img = "") {
         this.LastName = LastName;
         this.FirstName = FirstName;
         this.city = city;
         this.state = state;
+        this.img = img;
+    }
+}
+class Quote {
+    constructor(quote) {
+        this.quote = quote;
+    }
+}
+class Pokemon {
+    constructor(image = "", name = "") {
+        this.image = image;
+        this.name = name;
+    }
+}
+class BaconText {
+    constructor(text) {
+        this.text = text;
     }
 }
 //# sourceMappingURL=model.js.map
