@@ -16,6 +16,7 @@ class Render {
         this.RenderTheSourceAndTamplate('#backon-template', baconText, '.partMainbackonText');
     }
     RenderTheSourceAndTamplate(idofTamplate, objectKind, theInsert) {
+        $(theInsert).empty();
         const source = $(idofTamplate).html();
         const template = Handlebars.compile(source);
         const newHTML = template({ object: objectKind });

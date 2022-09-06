@@ -2,6 +2,7 @@
 class Render{
     
     RenderMainUser(user:User |Object){   
+        
        this.RenderTheSourceAndTamplate('#userMain-template',user,'.header')
     }
 
@@ -22,6 +23,7 @@ class Render{
     }
 
     RenderTheSourceAndTamplate(idofTamplate:String,objectKind:any,theInsert:String){
+       $(theInsert).empty();
         const source = $(idofTamplate).html();
         const template = Handlebars.compile(source)
         const newHTML = template({object:objectKind})

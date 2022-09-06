@@ -28,11 +28,12 @@ async function GetBaconText() {
 }
 
 
-$('#generete').on('click',()=>{
+$('#generete').on('click',()=>{    
     gettheMainUser();
     getKyneaWestQuaote();
     getPokimon();
     GetBaconText();
     getFirendsOfUser();
+    
 })
 
