@@ -1,8 +1,9 @@
 
+
+
 class Render{
     
-    RenderMainUser(user:User |Object){   
-        
+    RenderMainUser(user:User |Object){           
        this.RenderTheSourceAndTamplate('#userMain-template',user,'.header')
     }
 
@@ -28,7 +29,10 @@ class Render{
         const template = Handlebars.compile(source)
         const newHTML = template({object:objectKind})
         $(theInsert).append(newHTML);
+        
     }
+
+    
 
     
     

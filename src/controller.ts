@@ -41,3 +41,7 @@ $('#generete').on('click',()=>{
     
 })
 
+$('#save').on('click',()=>{
+    ModelSinglton.SetTheLocalStorage();
+})
+

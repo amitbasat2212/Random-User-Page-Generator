@@ -51,4 +51,7 @@ $('#generete').on('click', () => {
     GetBaconText();
     getFirendsOfUser();
 });
+$('#save').on('click', () => {
+    ModelSinglton.SetTheLocalStorage();
+});
 //# sourceMappingURL=controller.js.map
