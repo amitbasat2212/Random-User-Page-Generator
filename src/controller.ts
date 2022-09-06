@@ -1,6 +1,7 @@
 
 const ModelSinglton =new Model();
 const RenderSinglton = new Render();
+
 async function getFirendsOfUser() {
     const friends =await ModelSinglton.GettingFriendsOfUser();
     RenderSinglton.RenderFriendsUser(friends)
@@ -27,6 +28,9 @@ async function GetBaconText() {
     RenderSinglton.RenderBaconText(text)
 }
 
+async function LoadToDataBase(){
+
+}
 
 $('#generete').on('click',()=>{    
     gettheMainUser();

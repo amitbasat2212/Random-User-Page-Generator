@@ -40,6 +40,10 @@ function GetBaconText() {
         RenderSinglton.RenderBaconText(text);
     });
 }
+function LoadToDataBase() {
+    return __awaiter(this, void 0, void 0, function* () {
+    });
+}
 $('#generete').on('click', () => {
     gettheMainUser();
     getKyneaWestQuaote();

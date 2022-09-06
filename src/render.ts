@@ -23,12 +23,14 @@ class Render{
     }
 
     RenderTheSourceAndTamplate(idofTamplate:String,objectKind:any,theInsert:String){
-       $(theInsert).empty();
+       $(theInsert).empty();     
         const source = $(idofTamplate).html();
         const template = Handlebars.compile(source)
         const newHTML = template({object:objectKind})
         $(theInsert).append(newHTML);
     }
+
+    
     
     
 }
