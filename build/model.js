@@ -59,7 +59,9 @@ class Model {
                 console.log(GetPokimon);
                 const urlArray = JSON.stringify(GetPokimon.results[0].url).split("/");
                 const PetIndex = urlArray[urlArray.length - 2];
-                const pokemon = new Pokemon(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${PetIndex}.png`, GetPokimon.results[0].name);
+                const RenderTitleName = GetPokimon.results[0].name[0].toUpperCase() + GetPokimon.results[0].name.slice(1);
+                console.log(RenderTitleName);
+                const pokemon = new Pokemon(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${PetIndex}.png`, RenderTitleName);
                 return pokemon;
             }
             catch (err) {
