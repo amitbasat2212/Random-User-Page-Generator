@@ -10,14 +10,16 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="allPage">
+  <div class="allPage">
         <div class="header">
 
         </div>
-
         <div class="partMainQuote">
 
         </div>
+
+     <div class="ContentSection">  
+        
         <div class="partMainPockimon">
 
         </div>
@@ -25,51 +27,51 @@
 
         </div>
 
-        <div class="partMainFriendsSection">
+        
+        <button id="generete">Generte User</button>
+
+    </div>   
+        <div class="SectionOfUserFriends">
 
         </div>
-</div>
-
-    <div class="SectionOfUserFriends">
-
     </div>
 
-    <button id="generete">Generte User</button>
+ 
     <script id="userMain-template" type="text/x-handlebars-template">
         <img src="{{object.img}}" class="profileImage">    
-        <p class="nameUser">{{object.FirstName}} {{object.LastName}}</p>
-        <p class="StateAndCity">{{object.state}}, {{object.city}}</p>
+        <p class="userContent">{{object.FirstName}} {{object.LastName}}</p><br>
+        <p class="userContent">{{object.state}}, {{object.city}}</p>
                     
     </script>
 
     <script id="Quote-template" type="text/x-handlebars-template">
-        <div id="" class="card">         
+               
               <p class="favorite">Favorite Quote</p>
               <p class="Quote"> <q>{{object.quote}}</q></p>
-         </div>         
+                
          
      </script>
 
      <script id="pockimon-template" type="text/x-handlebars-template">
-        <div id="" class="card">         
+          
               <img  srcset="{{object.image}}">
               <p class="NamePockimon">favorite pockimon: {{object.name}}</p>
-         </div>         
+                 
          
      </script>
 
      <script id="backon-template" type="text/x-handlebars-template">
-        <div id="" class="card">         
+              
              <p>About Me</p>
               <p class="backonText">{{object.text}}</p>
-         </div>         
+                  
          
      </script>
 
      <script id="friends-template" type="text/x-handlebars-template">
         
         {{#each object}}
-         <div class="NamePockimon">{{FirstName}} {{LastName}}</div>
+         <div class="friendsNames">{{FirstName}} {{LastName}}</div>
         {{/each}}        
          
      </script>

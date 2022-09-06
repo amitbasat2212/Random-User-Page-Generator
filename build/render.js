@@ -4,7 +4,6 @@ class Render {
         this.RenderTheSourceAndTamplate('#userMain-template', user, '.header');
     }
     RenderFriendsUser(users) {
-        console.log(users);
         this.RenderTheSourceAndTamplate('#friends-template', users, '.SectionOfUserFriends');
     }
     Renderpokimon(pockimon) {

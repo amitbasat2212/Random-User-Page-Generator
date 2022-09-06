@@ -6,7 +6,6 @@ class Render{
     }
 
     RenderFriendsUser(users:User[] |Object){
-        console.log(users)
         this.RenderTheSourceAndTamplate('#friends-template',users,'.SectionOfUserFriends')
     }
 
