@@ -45,11 +45,21 @@ function LoadFromDataBaseToScreen() {
         let UserDetails = yield ModelSinglton.loadUserBeenSave(RenderSinglton.getUserDetails());
         if (Array.isArray(UserDetails)) {
             for (let i = 0; i < UserDetails.length; i++) {
-                RenderSinglton.RenderMainUser(UserDetails[i].User);
-                RenderSinglton.RenderBaconText(UserDetails[i].Backotext);
-                RenderSinglton.RenderFriendsUser(UserDetails[i].Users);
-                RenderSinglton.RenderQoute(UserDetails[i].Quote);
-                RenderSinglton.Renderpokimon(UserDetails[i].Pokemon);
+                if (UserDetails[i].User != undefined) {
+                    RenderSinglton.RenderMainUser(UserDetails[i].User);
+                }
+                else if (UserDetails[i].Backotext) {
+                    RenderSinglton.RenderBaconText(UserDetails[i].Backotext);
+                }
+                else if (UserDetails[i].Users) {
+                    RenderSinglton.RenderFriendsUser(UserDetails[i].Users);
+                }
+                else if (UserDetails[i].Quote) {
+                    RenderSinglton.RenderQoute(UserDetails[i].Quote);
+                }
+                else if (UserDetails[i].Pokemon) {
+                    RenderSinglton.Renderpokimon(UserDetails[i].Pokemon);
+                }
             }
         }
     });

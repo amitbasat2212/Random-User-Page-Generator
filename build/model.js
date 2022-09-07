@@ -90,25 +90,25 @@ class Model {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const LocalUsers = [];
-                console.log(data);
+                const localStorage1 = JSON.parse(localStorage.UserDetils || "[]");
+                console.log(localStorage1);
                 for (let i = 0; i < data.length; i++) {
                     if (data[i] instanceof Quote) {
-                        LocalUsers.push({ Quote: Object.assign(Quote, data[i]) });
+                        LocalUsers.push({ Quote: Object.assign(Quote, localStorage1[i]) });
                     }
                     else if (data[i] instanceof User) {
-                        LocalUsers.push({ User: Object.assign(User, data[i]) });
+                        LocalUsers.push({ User: Object.assign(User, localStorage1[i]) });
                     }
                     else if (data[i] instanceof Array) {
-                        LocalUsers.push({ Users: Object.assign(Array, data[i]) });
+                        LocalUsers.push({ Users: Object.assign(Array, localStorage1[i]) });
                     }
                     else if (data[i] instanceof BaconText) {
-                        LocalUsers.push({ Backotext: Object.assign(BaconText, data[i]) });
+                        LocalUsers.push({ Backotext: Object.assign(BaconText, localStorage1[i]) });
                     }
                     else if (data[i] instanceof Pokemon) {
-                        LocalUsers.push({ Pokemon: Object.assign(Pokemon, data[i]) });
+                        LocalUsers.push({ Pokemon: Object.assign(Pokemon, localStorage1[i]) });
                     }
                 }
-                console.log(LocalUsers);
                 return LocalUsers;
             }
             catch (err) {
