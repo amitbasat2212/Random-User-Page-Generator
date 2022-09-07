@@ -9,9 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 class Model {
-    constructor() {
-        this.LocalStorageTemp = [];
-    }
     GettingFriendsOfUser() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -20,7 +17,6 @@ class Model {
                 getFriends.results.forEach((element) => {
                     UserFriends.push(new User(element.name.first, element.name.last));
                 });
-                this.LocalStorageTemp.push({ userFriends: UserFriends });
                 return (UserFriends);
             }
             catch (err) {
@@ -31,10 +27,9 @@ class Model {
     getMainUser() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const getFriends = yield $.get("https://randomuser.me/api/?results=1");
-                const user = getFriends.results[0];
+                const GetUser = yield $.get("https://randomuser.me/api/?results=1");
+                const user = GetUser.results[0];
                 const MainUser = new User(user.name.first, user.name.last, user.location.city, user.location.state, user.picture.medium);
-                this.LocalStorageTemp.push({ MainUser: MainUser });
                 return MainUser;
             }
             catch (err) {
@@ -47,7 +42,6 @@ class Model {
             try {
                 const getQuote = yield $.get("https://api.kanye.rest");
                 const quote = new Quote(getQuote.quote);
-                this.LocalStorageTemp.push({ quote: quote });
                 return quote;
             }
             catch (err) {
@@ -63,7 +57,6 @@ class Model {
                 const PetIndex = urlArray[urlArray.length - 2];
                 const RenderTitleName = GetPokimon.results[0].name[0].toUpperCase() + GetPokimon.results[0].name.slice(1);
                 const pokemon = new Pokemon(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${PetIndex}.png`, RenderTitleName);
-                this.LocalStorageTemp.push({ pokemon: pokemon });
                 return pokemon;
             }
             catch (err) {
@@ -76,7 +69,6 @@ class Model {
             try {
                 const GetText = yield $.get("https://baconipsum.com/api/?type=meat-and-filler");
                 const TextLorem = new BaconText(GetText.join(" "));
-                this.LocalStorageTemp.push({ TextLorem: TextLorem });
                 return TextLorem;
             }
             catch (err) {
@@ -84,10 +76,27 @@ class Model {
             }
         });
     }
-    SetTheLocalStorage() {
+    SetTheLocalStorage(data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                localStorage.UserDetils = JSON.stringify(this.LocalStorageTemp);
+                localStorage.UserDetils = JSON.stringify(data);
+            }
+            catch (err) {
+                return { err: err };
+            }
+        });
+    }
+    loadUserBeenSave(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const LocalUsers = [];
+                const target = [];
+                LocalUsers.push(Object.assign(Quote, data["Quote"]));
+                LocalUsers.push(Object.assign(User, data["User"]));
+                LocalUsers.push(Object.assign(BaconText, data["BaconText"]));
+                LocalUsers.push(Object.assign(target, data["Array"]));
+                LocalUsers.push(Object.assign(Pokemon, data["Pokemon"]));
+                return LocalUsers;
             }
             catch (err) {
                 return { err: err };
@@ -112,7 +121,7 @@ class Quote {
 class Pokemon {
     constructor(image = "", name = "") {
         this.image = image;
-        this.name = name;
+        this.namePoc = name;
     }
 }
 class BaconText {

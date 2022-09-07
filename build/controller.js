@@ -40,8 +40,9 @@ function GetBaconText() {
         RenderSinglton.RenderBaconText(text);
     });
 }
-function LoadToDataBase() {
+function LoadFromDataBaseToScreen() {
     return __awaiter(this, void 0, void 0, function* () {
+        let UserDetails = yield ModelSinglton.loadUserBeenSave(RenderSinglton.getUserDetails());
     });
 }
 $('#generete').on('click', () => {
@@ -52,6 +53,9 @@ $('#generete').on('click', () => {
     getFirendsOfUser();
 });
 $('#save').on('click', () => {
-    ModelSinglton.SetTheLocalStorage();
+    ModelSinglton.SetTheLocalStorage(RenderSinglton.getUserDetails());
+});
+$('#load').on('click', () => {
+    LoadFromDataBaseToScreen();
 });
 //# sourceMappingURL=controller.js.map

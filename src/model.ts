@@ -1,8 +1,7 @@
 
 type LocalStorageObjects= User | User[] | Pokemon |Quote|BaconText |Object;
-class Model{   
-    
-    LocalStorageTemp:LocalStorageObjects[]=[];
+class Model{      
+  
     
     async GettingFriendsOfUser():Promise<User[] | Object>{     
         try{
@@ -11,7 +10,7 @@ class Model{
             getFriends.results.forEach((element:any) => {
                 UserFriends.push(new User(element.name.first,element.name.last))
             });
-            this.LocalStorageTemp.push({userFriends:UserFriends})
+            
             return (UserFriends)       
         } catch(err){
             return {err:err}
@@ -22,10 +21,10 @@ class Model{
 
     async getMainUser():Promise<User | Object>{    
         try{
-            const getFriends = await $.get("https://randomuser.me/api/?results=1")
-            const user =getFriends.results[0];
+            const GetUser = await $.get("https://randomuser.me/api/?results=1")
+            const user =GetUser.results[0];
             const MainUser:User = new User(user.name.first,user.name.last,user.location.city,user.location.state,user.picture.medium)      
-            this.LocalStorageTemp.push({MainUser:MainUser})
+        
             return MainUser;
         } catch(err){
             return {err:err}
@@ -41,7 +40,7 @@ class Model{
         try{
             const getQuote = await $.get("https://api.kanye.rest")
             const quote:Quote=new Quote(getQuote.quote);
-            this.LocalStorageTemp.push({quote:quote})
+         
             return quote;
         } catch(err){
             return {err:err};
@@ -56,7 +55,7 @@ class Model{
             const PetIndex = urlArray[urlArray.length-2]
             const RenderTitleName = GetPokimon.results[0].name[0].toUpperCase() + GetPokimon.results[0].name.slice(1);
             const pokemon:Pokemon=new Pokemon(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${PetIndex}.png`,RenderTitleName);
-            this.LocalStorageTemp.push({pokemon:pokemon})
+            
             return pokemon;
         } catch(err){
             return {err:err};
@@ -67,7 +66,7 @@ class Model{
         try{
             const GetText= await $.get("https://baconipsum.com/api/?type=meat-and-filler")
             const TextLorem:BaconText=new BaconText(GetText.join(" "));
-            this.LocalStorageTemp.push({TextLorem:TextLorem})
+            
             return TextLorem;
         } catch(err){
             return {err:err};
@@ -75,9 +74,27 @@ class Model{
            
     }
 
-    async SetTheLocalStorage(){
-        try{ 
-           localStorage.UserDetils=JSON.stringify(this.LocalStorageTemp);          
+    async SetTheLocalStorage(data:any){
+        try{         
+           localStorage.UserDetils= JSON.stringify(data);
+                  
+                
+         } catch(err){
+            return {err:err};
+        }  
+           
+    }
+
+    async loadUserBeenSave(data:any){
+        try{           
+           const LocalUsers :LocalStorageObjects[]=[];  
+           const target:User[] = [];                                    
+           LocalUsers.push(Object.assign(Quote,data["Quote"]));
+           LocalUsers.push(Object.assign(User,data["User"]));
+           LocalUsers.push(Object.assign(BaconText,data["BaconText"]));
+           LocalUsers.push(Object.assign(target,data["Array"]));
+           LocalUsers.push(Object.assign(Pokemon,data["Pokemon"]));                 
+           return LocalUsers;
       
         } catch(err){
             return {err:err};
@@ -116,11 +133,11 @@ class Quote{
 
 class Pokemon{
     image:String
-    name:String
+    namePoc:String
     constructor(image:String="",name:String="")
     {       
         this.image=image;
-        this.name=name;
+        this.namePoc=name;
     }
 } 
 

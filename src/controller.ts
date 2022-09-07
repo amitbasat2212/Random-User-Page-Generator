@@ -28,11 +28,12 @@ async function GetBaconText() {
     RenderSinglton.RenderBaconText(text)
 }
 
-async function LoadToDataBase(){
-
+async function LoadFromDataBaseToScreen(){
+    let UserDetails =await ModelSinglton.loadUserBeenSave(RenderSinglton.getUserDetails());
+            
+    
 }
-
-$('#generete').on('click',()=>{    
+  $('#generete').on('click',()=>{    
     gettheMainUser();
     getKyneaWestQuaote();
     getPokimon();
@@ -42,6 +43,11 @@ $('#generete').on('click',()=>{
 })
 
 $('#save').on('click',()=>{
-    ModelSinglton.SetTheLocalStorage();
+    ModelSinglton.SetTheLocalStorage(RenderSinglton.getUserDetails());
+})
+
+$('#load').on('click',()=>{
+   LoadFromDataBaseToScreen(); 
+   
 })
 
