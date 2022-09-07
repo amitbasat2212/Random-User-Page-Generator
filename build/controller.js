@@ -43,6 +43,15 @@ function GetBaconText() {
 function LoadFromDataBaseToScreen() {
     return __awaiter(this, void 0, void 0, function* () {
         let UserDetails = yield ModelSinglton.loadUserBeenSave(RenderSinglton.getUserDetails());
+        if (Array.isArray(UserDetails)) {
+            for (let i = 0; i < UserDetails.length; i++) {
+                RenderSinglton.RenderMainUser(UserDetails[i].User);
+                RenderSinglton.RenderBaconText(UserDetails[i].Backotext);
+                RenderSinglton.RenderFriendsUser(UserDetails[i].Users);
+                RenderSinglton.RenderQoute(UserDetails[i].Quote);
+                RenderSinglton.Renderpokimon(UserDetails[i].Pokemon);
+            }
+        }
     });
 }
 $('#generete').on('click', () => {

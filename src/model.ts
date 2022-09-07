@@ -1,4 +1,6 @@
-
+interface LooseObject {
+    [key: string]: any
+}
 type LocalStorageObjects= User | User[] | Pokemon |Quote|BaconText |Object;
 class Model{      
   
@@ -76,8 +78,7 @@ class Model{
 
     async SetTheLocalStorage(data:any){
         try{         
-           localStorage.UserDetils= JSON.stringify(data);
-                  
+           localStorage.UserDetils= JSON.stringify(data);                 
                 
          } catch(err){
             return {err:err};
@@ -87,13 +88,22 @@ class Model{
 
     async loadUserBeenSave(data:any){
         try{           
-           const LocalUsers :LocalStorageObjects[]=[];  
-           const target:User[] = [];                                    
-           LocalUsers.push(Object.assign(Quote,data["Quote"]));
-           LocalUsers.push(Object.assign(User,data["User"]));
-           LocalUsers.push(Object.assign(BaconText,data["BaconText"]));
-           LocalUsers.push(Object.assign(target,data["Array"]));
-           LocalUsers.push(Object.assign(Pokemon,data["Pokemon"]));                 
+           const LocalUsers :LooseObject []=[];              
+           console.log(data)
+           for(let i=0;i<data.length;i++){
+            if(data[i] instanceof Quote){
+                LocalUsers.push({Quote:Object.assign(Quote,data[i])});
+            }else if(data[i] instanceof User){
+                LocalUsers.push({User:Object.assign(User,data[i])});
+            }else if(data[i] instanceof Array){
+                LocalUsers.push({Users:Object.assign(Array,data[i])});
+            }else if(data[i] instanceof BaconText){
+                LocalUsers.push({Backotext:Object.assign(BaconText,data[i])});
+            }else if(data[i] instanceof Pokemon){
+                LocalUsers.push({Pokemon:Object.assign(Pokemon,data[i])});
+            }
+           }                                        
+           console.log(LocalUsers)
            return LocalUsers;
       
         } catch(err){
