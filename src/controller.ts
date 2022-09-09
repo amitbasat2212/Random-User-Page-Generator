@@ -33,7 +33,7 @@ async function LoadFromDataBaseToScreen(){
     if(Array.isArray(UserDetails)){
         for(let i=0;i<UserDetails.length;i++){
            if(UserDetails[i].User!=undefined){
-                RenderSinglton.RenderMainUser(UserDetails[i].User) 
+              RenderSinglton.RenderMainUser(UserDetails[i].User) 
            } else if(UserDetails[i].Backotext){
             RenderSinglton.RenderBaconText(UserDetails[i].Backotext)      
            }else if(UserDetails[i].Users){
